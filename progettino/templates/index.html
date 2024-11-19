@@ -3,8 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>La tua lista della spesa</title>
     </head>
     <body>
-        <h1>lesgoski</h1>
+        <h1>Lista della Spesa</h1>
+        <div>
+            <li>
+                {%if lista %}<!--se e inizializzato lo fa senno va nel else-->
+                    <h2>piena come tu ma</h2>
+                    <ul>
+                        {% for elemento in lista %}
+                            <li>{{ elemento }}</li>
+                        {% endfor %}
+                    </ul>
+                {%else%}
+                    <h2>la tua lista è vuota</h2>
+                {%endif %}
+            </li>
+        </div>
     </body>
 </html>
