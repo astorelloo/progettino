@@ -6,20 +6,26 @@
         <title>La tua lista della spesa</title>
     </head>
     <body>
-        <h1>Lista della Spesa</h1>
-        <div>
-            <li>
-                {%if lista %}<!--se e inizializzato lo fa senno va nel else-->
-                    <h2>piena come tu ma</h2>
-                    <ul>
-                        {% for elemento in lista %}
-                            <li>{{ elemento }}</li>
-                        {% endfor %}
-                    </ul>
-                {%else%}
-                    <h2>la tua lista è vuota</h2>
-                {%endif %}
-            </li>
-        </div>
-    </body>
+        <h1>La tua Lista della Spesa</h1>
+        {% if lista %}
+            <ul>
+                {% for elemento in lista %}
+                <li>
+                    {{ elemento }}
+                    <form action="/rimuovi/{{ loop.index0 }}" method="post"
+                        style="display:inline;">
+                        <button type="submit">Rimuovi</button>
+                    </form>
+                </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+            <p>La lista è vuota.</p>
+        {% endif %}
+        <form action="/aggiungi" method="post">
+        <input type="text" name="elemento" placeholder="Aggiungi un elemento"
+        required>
+        <button type="submit">Aggiungi</button>
+        </form>
+        </body>
 </html>
