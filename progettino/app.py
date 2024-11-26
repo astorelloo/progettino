@@ -1,4 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import flask_sqlalchemy
+#configurazione database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///lista_spesa.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+with app.app_context():
+    db.create_all()
+
 app = Flask(__name__)
 lista_spesa = ["casa", "macchina", "zio pera"]
 @app.route('/')
