@@ -1,4 +1,4 @@
-from flask_sqlalchemy import flask_sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 #creazione della tabella con le colonne
 db = SQLAlchemy() #inizialliziamo sqlAlchemy
 class ListaSpesa(db.Model):#tabella

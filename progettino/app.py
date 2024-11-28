@@ -10,24 +10,33 @@ db.init_app(app)
 #crea il db se non esiste 
 with app.app_context():
     db.create_all()
-
+#------------------------------------------
 lista_spesa = ["casa", "macchina", "zio pera"]
 @app.route('/')
 def home():
-    ListaSpesa.query.all()
-    return render_template('index.html', lista=lista_spesa)
+    lista_spesa = ListaSpesa.query.all() 
+    return render_template('home.html', lista=lista_spesa)
 
 @app.route('/aggiungi', methods=['POST'])
 def aggiungi():
     elemento = request.form['elemento']
     if elemento:
-        lista_spesa.append(elemento)
+        nuovo_elemento = ListaSpesa(elemento=elemento) 
+        db.session.add(nuovo_elemento) 
+        db.session.commit() 
     return redirect(url_for('home'))
 
 @app.route('/rimuovi/<int:indice>', methods=['POST'])
 def rimuovi(indice):
-    if 0 <= indice < len(lista_spesa):
-        lista_spesa.pop(indice)
+    elemento = ListaSpesa.query.get_or_404(indice) 
+    db.session.delete(elemento) 
+    db.session.commit() 
+    return redirect(url_for('home'))
+
+@app.route('/svuota', methods=['POST'])
+def svuota():
+    ListaSpesa.query.delete() 
+    db.session.commit()
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
