@@ -19,19 +19,19 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>La lista è vuota.</p>
+                  <p><b>La lista è vuota.</b></p>
             {% endif %}
-            
             <form action="/add" method="post">
                 <div>
-                    <label for="elemento" class="form-label">Aggiungi un prodotto</label>
+                    <label for="elemento" class="form-label"> <b>Aggiungi un prodotto:</b> </label>
                     <input type="text" name="elemento" id="product" placeholder="Es. Carne, Pasta, Pollo etc.">
                 </div>
-                <button type="submit" class="btn btn-success ">Aggiungi</button>
+                <br>
+                <button type="submit" class=" operazioni btn btn-success ">Aggiungi</button>
             </form>
             
             <form action="/delete" method="post">
-                <button type="submit" class="btn btn-outline-danger ">Svuota Lista</button>
+                <button type="submit" class="operazioni btn btn-outline-danger ">Svuota Lista</button>
             </form> 
         </div>
     </body> 

@@ -14,7 +14,8 @@ lista_spese = []
 @app.route('/')
 def home():
     lista_spesa = ListaSpesa.query.all()
-    return render_template('index.html' , lista_spese = lista_spesa) 
+    return render_template('index.html' , lista_spese = lista_spesa)
+    
 @app.route('/add', methods=['POST'])
 def add():
     elemento = request.form['elemento']
