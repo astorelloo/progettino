@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="../static/style.css" rel="stylesheet">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>La tua lista della spesa</title>
+        <title>Lista Spese</title>
     </head>
     <body>
-        <h1>La tua Lista della Spesa</h1>
-        {% if lista %}
-        <ul>
-        {% for elemento in lista %}
-            <li>
-                {{ elemento.elemento }}
-                <form action="/rimuovi/{{ elemento.id }}" method="post" style="display:inline;">
-                    <button type="submit">Rimuovi</button>
-                </form>
-            </li>
-        {% endfor %}
-        <form action="/aggiungi" method="post">
-        <input type="text" name="elemento" placeholder="Aggiungi un elemento"
-        required>
-        <button type="submit">Aggiungi</button>
-        </form>
-        </body>
+        <div class="container mt-5 shadow-lg p-4 rounded bg-white">
+            <h1 class="text-center text-primary mb-4">Lista della Spesa</h1>
+            
+            {% if lista_spese %}
+                <ul class="list-group">
+                    {% for elemento in lista_spese %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ elemento.elemento }}
+                        <form action="/remove/{{elemento.id}}" method="post" class="m-0">
+                            <button type="submit" class="btn-delete">Rimuovi</button>
+                        </form> 
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center text-muted mt-4">La lista è vuota.</p>
+            {% endif %}
+            
+            <form action="/add" method="post" class="mt-4">
+                <div class="mb-3">
+                    <label for="elemento" class="form-label">Aggiungi un prodotto</label>
+                    <input type="text" name="elemento" class="form-control" id="product" placeholder="Es. Latte, Pane, etc.">
+                </div>
+                <button type="submit" class="btn btn-success w-100">Aggiungi</button>
+            </form>
+            
+            <form action="/delete" method="post" class="mt-4">
+                <button type="submit" class="btn btn-outline-danger w-100">Svuota Lista</button>
+            </form> 
+        </div>
+    </body> 
 </html>
