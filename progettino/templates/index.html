@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- si collega il css -->
         <link href="../static/style.css" rel="stylesheet">
         <title>Lista Spese</title>
     </head>
     <body>
         <div class="container">
             <h1>Lista della Spesa</h1>
+            <!-- if per vedere se la lista è stata inizializzata  -->
             {% if lista_spese %}
                 <ul class="list-group">
+                    <!-- for che visualizza ogni item della lista e db --> 
                     {% for elemento in lista_spese %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <h2>{{ elemento.elemento }}</h2>
+                        <!-- bottone che chiama il metodo per eliminare un elemento -->
                         <form action="/remove/{{elemento.id}}" method="post">
                             <button type="submit" class="btn-delete">Rimuovi</button>
                         </form> 
@@ -19,17 +23,20 @@
                     {% endfor %}
                 </ul>
             {% else %}
+            <!-- se la lista non è stata inizializzata dice che la lista è vuota -->
                   <p><b>La lista è vuota.</b></p>
             {% endif %}
+            <!-- blocco per aggiungere gli elementi con la textbar -->
             <form action="/add" method="post">
                 <div>
                     <label for="elemento" class="form-label"> <b>Aggiungi un prodotto:</b> </label>
                     <input type="text" name="elemento" id="product" placeholder="Es. Carne, Pasta, Pollo etc.">
                 </div>
                 <br>
+                <!-- bottone che chiama il metodo per aggiungere gli elementi-->
                 <button type="submit" class=" operazioni btn btn-success ">Aggiungi</button>
             </form>
-            
+            <!-- bottone che chiama il metodo per eliminare ogni elemento -->
             <form action="/delete" method="post">
                 <button type="submit" class="operazioni btn btn-outline-danger ">Svuota Lista</button>
             </form> 
